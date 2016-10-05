@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    tools:context="ks.com.ksgas.MainActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/content_main" />
+
+    <View
+        android:id="@+id/shadowView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCFFFFFF"
+        android:visibility="gone" />
+
+    <ks.com.ksgas.floatingactionmenu.FloatingActionsMenu
+        android:id="@+id/multiple_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        fab:fab_addButtonColorNormal="@color/colorPrimaryDark"
+        fab:fab_addButtonColorPressed="@color/white_pressed"
+        fab:fab_addButtonPlusIconColor="@color/white"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin">
+
+        <ks.com.ksgas.floatingactionmenu.FloatingActionButton
+            android:id="@+id/action_order_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_title="@string/order_history"
+            app:fab_icon="@mipmap/order_history"
+            fab:fab_colorPressed="@color/white_pressed"
+            android:visibility="gone"/>
+
+        <ks.com.ksgas.floatingactionmenu.FloatingActionButton
+            android:id="@+id/action_order_req"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_title="@string/order_req"
+            app:fab_icon="@mipmap/order_req"
+            fab:fab_colorPressed="@color/white_pressed"
+            android:visibility="gone"/>
+
+        <ks.com.ksgas.floatingactionmenu.FloatingActionButton
+            android:id="@+id/action_book_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_title="Booking History"
+            app:fab_icon="@drawable/history"
+            fab:fab_colorPressed="@color/white_pressed"/>
+
+        <ks.com.ksgas.floatingactionmenu.FloatingActionButton
+            android:id="@+id/action_book_cylinder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimaryDark"
+            fab:fab_title="Book Cylinder"
+            app:fab_icon="@drawable/cylinder"
+            fab:fab_colorPressed="@color/white_pressed"/>
+
+        <ks.com.ksgas.floatingactionmenu.FloatingActionButton
+            android:id="@+id/action_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/colorPrimary"
+            fab:fab_title="Login"
+            app:fab_icon="@drawable/user"
+            fab:fab_colorPressed="@color/white_pressed"/>
+        </ks.com.ksgas.floatingactionmenu.FloatingActionsMenu>
+
+</android.support.design.widget.CoordinatorLayout>

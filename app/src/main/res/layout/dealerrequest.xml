@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/emailview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="10dp"/>
+
+    <EditText
+        android:id="@+id/your_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/emailview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Email"
+        android:textSize="14dp"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:focusable="false"
+        android:background="@drawable/edit_roundcorner"/>
+
+    <TextView
+        android:id="@+id/phoneview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/your_email"/>
+
+    <EditText
+        android:id="@+id/your_phone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/phoneview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Phone"
+        android:textSize="14dp"
+        android:inputType="phone"
+        android:background="@drawable/edit_roundcorner"/>
+
+    <TextView
+        android:id="@+id/msgview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/msg"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/your_phone"/>
+
+    <EditText
+        android:id="@+id/your_msg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/msgview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:hint="Message"
+        android:textSize="14dp"
+        android:inputType="textMultiLine"
+        android:background="@drawable/edit_roundcorner"/>
+
+    <Button
+        android:id="@+id/email_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button_background"
+        android:layout_below="@+id/your_msg"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="24dp"/>
+
+</RelativeLayout>

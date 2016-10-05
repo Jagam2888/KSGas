@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_login"
+            android:icon="@drawable/user"
+            android:title="Login" />
+        <item
+            android:id="@+id/nav_book_cylinder"
+            android:icon="@drawable/cylinder"
+            android:title="Book Cylinder"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_book_history"
+            android:icon="@drawable/history"
+            android:title="Booking History"
+            android:visible="true"/>
+        <item
+            android:id="@+id/nav_order_history"
+            android:icon="@mipmap/order_history"
+            android:title="@string/order_history"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_order_req"
+            android:icon="@mipmap/order_req"
+            android:title="@string/order_req"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_dealer_list"
+            android:icon="@drawable/dealerlist"
+            android:title="Dealers List"
+            android:visible="false"/>
+        <item
+            android:id="@+id/nav_service_center"
+            android:icon="@drawable/servicecenter"
+            android:title="Service Center" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_talk"
+                android:icon="@drawable/talktous"
+                android:title="Talk to us" />
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/feedback"
+                android:title="Feedback your Dealers" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp"
+    android:paddingStart="4dp">
+
+    <TextView
+        android:id="@+id/cylinderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Cylinder Type : "/>
+
+    <TextView
+        android:id="@+id/cylinderTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="sample"
+        android:layout_toRightOf="@+id/cylinderView"/>
+
+    <TextView
+        android:id="@+id/phoneView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/cylinderTxt"
+        android:textStyle="bold"
+        android:text="Phone : "/>
+
+    <TextView
+        android:id="@+id/phoneTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/cylinderTxt"
+        android:layout_toRightOf="@+id/phoneView"
+        android:text="sample"/>
+
+    <TextView
+        android:id="@+id/dealerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/phoneTxt"
+        android:textStyle="bold"
+        android:text="Dealer : "
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/dealerTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/phoneTxt"
+        android:layout_toRightOf="@+id/dealerView"
+        android:text="sample"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/phoneTxt"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp">
+
+    <TextView
+        android:id="@+id/statusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:text="Status : "/>
+
+    <TextView
+        android:id="@+id/statusTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="sample"/></LinearLayout>
+
+</RelativeLayout>
