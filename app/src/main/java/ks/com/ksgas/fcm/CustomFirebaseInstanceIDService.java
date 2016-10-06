@@ -46,7 +46,7 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 //        sendTheRegisteredTokenToWebServer(refreshedToken);
     }
 
-    private void sendTheRegisteredTokenToWebServer(final String token){
+    /*private void sendTheRegisteredTokenToWebServer(final String token){
         queue = Volley.newRequestQueue(getApplicationContext());
         mySharedPreference = new MySharedPreference(getApplicationContext());
 
@@ -82,5 +82,5 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
             }
         };
         queue.add(stringPostRequest);
-    }
+    }*/
 }
