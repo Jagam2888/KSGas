@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:paddingStart="24dp"
+        android:background="@drawable/edit_roundcorner">
+
+    <TextView
+        android:id="@+id/mobileView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile_view"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/mobileTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile_no"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:layout_toRightOf="@+id/mobileView"/>
+
+    <TextView
+        android:id="@+id/emailView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_view"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="16dp"
+        android:layout_below="@+id/mobileTxt"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/emailTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_id"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:layout_toRightOf="@+id/emailView"
+        android:layout_below="@+id/mobileTxt"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/websiteView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/website_view"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="16dp"
+        android:layout_below="@+id/emailTxt"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/websiteTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/website"
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:layout_toRightOf="@+id/websiteView"
+        android:layout_below="@+id/emailTxt"
+        android:layout_marginTop="4dp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

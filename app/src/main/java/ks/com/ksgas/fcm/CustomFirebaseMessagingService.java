@@ -16,9 +16,6 @@ import org.json.JSONObject;
 
 import org.json.JSONException;
 
-import java.util.HashMap;
-
-import ks.com.ksgas.MainActivity;
 import ks.com.ksgas.R;
 import ks.com.ksgas.customer.BookingHistory;
 import ks.com.ksgas.dealer.OrderActivity;

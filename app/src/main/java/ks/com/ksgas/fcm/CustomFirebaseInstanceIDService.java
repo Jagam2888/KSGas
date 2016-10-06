@@ -1,24 +1,10 @@
 package ks.com.ksgas.fcm;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import ks.com.ksgas.common.Constants;
-
 
 public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
@@ -26,7 +12,6 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private RequestQueue queue;
 
-    private TokenObject tokenObject;
 
     private MySharedPreference mySharedPreference;
 

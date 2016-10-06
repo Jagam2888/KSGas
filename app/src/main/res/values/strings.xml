@@ -41,4 +41,10 @@
     <string name="service_center">Service Center</string>
     <string name="talk_us">Talk to us</string>
     <string name="feedback">Feedback your Dealers</string>
+    <string name="mobile_view">Mobile No. : </string>
+    <string name="mobile_no">+60 164440779</string>
+    <string name="email_view">Email : </string>
+    <string name="email_id">moorthy@kshomegas.com</string>
+    <string name="website_view">Website : </string>
+    <string name="website">kshomegas.com</string>
 </resources>

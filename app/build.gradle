@@ -9,8 +9,8 @@ android {
         applicationId "ks.com.ksgas"
         minSdkVersion 17
         targetSdkVersion 24
-        versionCode 5
-        versionName "1.4"
+        versionCode 6
+        versionName "1.5"
     }
     buildTypes {
         release {
@@ -29,6 +29,6 @@ dependencies {
     compile 'org.apache.httpcomponents:httpclient:4.5'
     compile 'com.google.firebase:firebase-messaging:9.0.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
-    compile 'com.google.code.gson:gson:2.6.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

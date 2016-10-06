@@ -258,6 +258,7 @@ public class MainActivity extends ActivityManager
         navigationView.getMenu().findItem(R.id.nav_order_history).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_order_req).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_order_balance).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_feedback).setTitle("Feedback");
         orderHistory.setVisibility(View.VISIBLE);
         orderReq.setVisibility(View.VISIBLE);
         actionBookCylinder.setVisibility(View.GONE);
@@ -415,9 +416,9 @@ public class MainActivity extends ActivityManager
         } else if (id == R.id.nav_service_center) {
 
         } else if (id == R.id.nav_talk) {
-
+            startActivity(new Intent(getApplicationContext(),Talktous.class));
         } else if (id == R.id.nav_feedback) {
-
+            startActivity(new Intent(getApplicationContext(),Feedback.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
