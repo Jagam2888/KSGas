@@ -2,6 +2,7 @@ package ks.com.ksgas;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.view.View;
@@ -17,8 +18,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import ks.com.ksgas.authendication.Login;
 import ks.com.ksgas.common.ActivityManager;
+import ks.com.ksgas.common.Constants;
+import ks.com.ksgas.common.ServiceHandler;
 import ks.com.ksgas.customer.BookCylinder;
 import ks.com.ksgas.customer.BookingHistory;
 import ks.com.ksgas.customer.DealerList;
@@ -98,6 +110,7 @@ public class MainActivity extends ActivityManager
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
             loginUser.setText("Dear "+userName);
             if(user_type.equalsIgnoreCase("dealer")) {
+                new check_balance().execute();
                 visibleItem();
             }
         }else {
@@ -176,6 +189,38 @@ public class MainActivity extends ActivityManager
 
     }
 
+    private class check_balance extends AsyncTask<String,String,String> {
+
+        String balanceAmount;
+        @Override
+        protected String doInBackground(String... strings) {
+            List<NameValuePair>valuePairs = new ArrayList<NameValuePair>();
+            valuePairs.add(new BasicNameValuePair("dealer_id",user_id));
+            String response = serviceHandler.makeServiceCall(Constants.check_balance, ServiceHandler.POST,valuePairs);
+            if(response != null) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject getJson = jsonObject.getJSONObject("response");
+                    String success = getJson.getString("Success");
+                    if(success.equalsIgnoreCase("1")) {
+                        JSONArray itemsArray = getJson.getJSONArray("items");
+                        JSONObject getItems = itemsArray.getJSONObject(0);
+                        balanceAmount = getItems.getString("amount");
+                    }
+                }catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            navigationView.getMenu().findItem(R.id.nav_order_balance).setTitle("Balance : "+balanceAmount);
+        }
+    }
+
     void menusClosed() {
         if(menus.isExpanded())
             menus.collapse();
@@ -212,6 +257,7 @@ public class MainActivity extends ActivityManager
         navigationView.getMenu().findItem(R.id.nav_dealer_list).setVisible(false);
         navigationView.getMenu().findItem(R.id.nav_order_history).setVisible(true);
         navigationView.getMenu().findItem(R.id.nav_order_req).setVisible(true);
+        navigationView.getMenu().findItem(R.id.nav_order_balance).setVisible(true);
         orderHistory.setVisibility(View.VISIBLE);
         orderReq.setVisibility(View.VISIBLE);
         actionBookCylinder.setVisibility(View.GONE);
@@ -394,6 +440,7 @@ public class MainActivity extends ActivityManager
             actionBookingHistory.setVisibility(View.VISIBLE);
             navigationView.getMenu().findItem(R.id.nav_book_history).setVisible(true);
             if(user_type.equalsIgnoreCase("dealer")) {
+                new check_balance().execute();
                 visibleItem();
             }
         }else {

@@ -5,16 +5,16 @@
         <item
             android:id="@+id/nav_login"
             android:icon="@drawable/user"
-            android:title="Login" />
+            android:title="@string/nav_login" />
         <item
             android:id="@+id/nav_book_cylinder"
             android:icon="@drawable/cylinder"
-            android:title="Book Cylinder"
+            android:title="@string/book_cylinder"
             android:visible="true"/>
         <item
             android:id="@+id/nav_book_history"
             android:icon="@drawable/history"
-            android:title="Booking History"
+            android:title="@string/book_history"
             android:visible="true"/>
         <item
             android:id="@+id/nav_order_history"
@@ -27,14 +27,19 @@
             android:title="@string/order_req"
             android:visible="false"/>
         <item
+            android:id="@+id/nav_order_balance"
+            android:icon="@drawable/cash"
+            android:title="@string/balance"
+            android:visible="false"/>
+        <item
             android:id="@+id/nav_dealer_list"
             android:icon="@drawable/dealerlist"
-            android:title="Dealers List"
+            android:title="@string/dealer_list"
             android:visible="false"/>
         <item
             android:id="@+id/nav_service_center"
             android:icon="@drawable/servicecenter"
-            android:title="Service Center" />
+            android:title="@string/service_center" />
 
     </group>
 
@@ -43,11 +48,11 @@
             <item
                 android:id="@+id/nav_talk"
                 android:icon="@drawable/talktous"
-                android:title="Talk to us" />
+                android:title="@string/talk_us" />
             <item
                 android:id="@+id/nav_feedback"
                 android:icon="@drawable/feedback"
-                android:title="Feedback your Dealers" />
+                android:title="@string/feedback" />
         </menu>
     </item>
 

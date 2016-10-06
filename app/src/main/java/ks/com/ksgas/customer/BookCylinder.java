@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -43,7 +42,7 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
     ArrayList<HashMap<String,String>>cylinderList, stateList,cityList;
     GPSTracker gps;
     String stateIdz, cylinderType, user_id;
-    boolean isStateClick = false;
+    boolean isStateClick = false, isCheckLocation = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -223,8 +222,12 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 });
                 alertView.show();
             }else {
-//                Toast.makeText(getApplicationContext(),String.valueOf(getIndexOFValue(state.getText().toString(),stateList)),Toast.LENGTH_LONG).show();
-                stateIdz = stateList.get(getIndexOFValue(state.getText().toString(),stateList)).get("state_id");
+                if(!state.getText().toString().trim().equalsIgnoreCase("")) {
+                    stateIdz = stateList.get(getIndexOFValue(state.getText().toString(), stateList)).get("state_id");
+                }else {
+                    gps.showSettingsAlert();
+                    isCheckLocation = true;
+                }
             }
         }
     }
@@ -414,5 +417,12 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isCheckLocation)
+            gps.getAddress(address,city,state);
     }
 }

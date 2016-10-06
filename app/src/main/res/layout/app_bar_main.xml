@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/colorPrimaryDark"
-            fab:fab_title="Booking History"
+            fab:fab_title="@string/book_history"
             app:fab_icon="@drawable/history"
             fab:fab_colorPressed="@color/white_pressed"/>
 
@@ -76,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/colorPrimaryDark"
-            fab:fab_title="Book Cylinder"
+            fab:fab_title="@string/book_cylinder"
             app:fab_icon="@drawable/cylinder"
             fab:fab_colorPressed="@color/white_pressed"/>
 
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/colorPrimary"
-            fab:fab_title="Login"
+            fab:fab_title="@string/nav_login"
             app:fab_icon="@drawable/user"
             fab:fab_colorPressed="@color/white_pressed"/>
         </ks.com.ksgas.floatingactionmenu.FloatingActionsMenu>
