@@ -136,6 +136,9 @@ public class CustomerFragment extends Fragment{
                         editor.putString("user_name",getArray.getString("user_name"));
                         editor.putString("phone",getArray.getString("phone"));
                         editor.putString("user_type",getArray.getString("user_type"));
+                        editor.putString("address",getArray.getString("address"));
+                        editor.putString("city",getArray.getString("city"));
+                        editor.putString("state",getArray.getString("state"));
                         editor.commit();
                     }else {
                         msg = getJson.getString("msg");

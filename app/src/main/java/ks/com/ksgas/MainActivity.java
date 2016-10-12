@@ -221,6 +221,25 @@ public class MainActivity extends ActivityManager
         }
     }
 
+    private class logoutTask extends AsyncTask<String,String,String> {
+        @Override
+        protected String doInBackground(String... strings) {
+            List<NameValuePair>valuePairs = new ArrayList<NameValuePair>();
+            valuePairs.add(new BasicNameValuePair("user_id",user_id));
+            serviceHandler.makeServiceCall(Constants.logout,ServiceHandler.POST,valuePairs);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            editor.clear();
+            editor.commit();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
+    }
+
     void menusClosed() {
         if(menus.isExpanded())
             menus.collapse();
@@ -356,13 +375,14 @@ public class MainActivity extends ActivityManager
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
-            if(user_id != null) {
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
+            if(isNetworkAvailable(getApplicationContext())) {
+                if (user_id != null) {
+                    new logoutTask().execute();
+                } else {
+                    startActivity(new Intent(getApplicationContext(), Login.class));
+                }
             }else {
-                startActivity(new Intent(getApplicationContext(),Login.class));
+                showAlert("Please Check Your Internet Connection!");
             }
             return true;
         }

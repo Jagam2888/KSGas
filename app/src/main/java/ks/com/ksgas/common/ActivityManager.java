@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 import ks.com.ksgas.R;
@@ -149,6 +150,18 @@ public class ActivityManager extends AppCompatActivity {
     }
     public void showToast(String value) {
         Toast.makeText(getApplicationContext(),value,Toast.LENGTH_LONG).show();
+    }
+
+    public int getIndexOFValue(String value, ArrayList<HashMap<String, String>> listMap) {
+
+        int i = 0;
+        for (Map<String, String> map : listMap) {
+            if (map.containsValue(value)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 
     public boolean isNetworkAvailable(Context context) {

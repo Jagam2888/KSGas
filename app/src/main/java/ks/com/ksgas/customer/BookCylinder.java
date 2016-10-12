@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -37,11 +40,11 @@ import ks.com.ksgas.common.ServiceHandler;
  */
 public class BookCylinder extends ActivityManager implements View.OnClickListener{
 
-    EditText cylinderColor, quantity, address, state, city, phone;
+    EditText cylinderColor, quantity, addressTxt, stateTxt, cityTxt, phone,code;
     static EditText expectedTime;
     ArrayList<HashMap<String,String>>cylinderList, stateList,cityList;
     GPSTracker gps;
-    String stateIdz, cylinderType, user_id;
+    String stateIdz, cylinderType, user_id,address,city,state;
     boolean isStateClick = false, isCheckLocation = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,26 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         Bundle bun = getIntent().getExtras();
         cylinderType = bun.getString("key");
         user_id = preferences.getString("user_id",null);
+        address = preferences.getString("address",null);
+        city = preferences.getString("city",null);
+        state = preferences.getString("state",null);
         initialize();
 
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean isChecked = ((CheckBox)view).isChecked();
+        switch (view.getId()) {
+            case R.id.checkbox:
+                if(isChecked) {
+                    addressTxt.setText(address);
+                    cityTxt.setText(city);
+                    stateTxt.setText(state);
+                }else {
+                    gps.getAddress(addressTxt,cityTxt,stateTxt);
+                }
+                break;
+        }
     }
 
     void initialize() {
@@ -66,18 +87,19 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         cylinderColor.setText(cylinderType);
         cylinderColor.setOnClickListener(this);
         quantity = (EditText)findViewById(R.id.quantity);
-        address = (EditText)findViewById(R.id.address);
-        state = (EditText)findViewById(R.id.state);
-        state.setOnClickListener(this);
-        city = (EditText)findViewById(R.id.city);
-        city.setOnClickListener(this);
+        addressTxt = (EditText)findViewById(R.id.address);
+        stateTxt = (EditText)findViewById(R.id.state);
+        stateTxt.setOnClickListener(this);
+        cityTxt = (EditText)findViewById(R.id.city);
+        cityTxt.setOnClickListener(this);
         phone = (EditText)findViewById(R.id.phone);
+        code = (EditText)findViewById(R.id.edit_code);
         expectedTime = (EditText)findViewById(R.id.expected_time);
         expectedTime.setText(getCurrentTime());
         expectedTime.setOnClickListener(this);
         Button submit = (Button)findViewById(R.id.submit);
         submit.setOnClickListener(this);
-        gps.getAddress(address,city,state);
+        gps.getAddress(addressTxt,cityTxt,stateTxt);
         new get_state().execute();
     }
 
@@ -148,17 +170,6 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         }
     }
 
-    private int getIndexOFValue(String value, ArrayList<HashMap<String, String>> listMap) {
-
-        int i = 0;
-        for (Map<String, String> map : listMap) {
-            if (map.containsValue(value)) {
-                return i;
-            }
-            i++;
-        }
-        return -1;
-    }
 
     private class get_state extends AsyncTask<String,String,String> {
         @Override
@@ -209,9 +220,9 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String strName = accountAdapter.getItem(which);
-                        state.setText(strName);
+                        stateTxt.setText(strName);
                         stateIdz = stateList.get(which).get("state_id");
-                        city.setText("");
+                        cityTxt.setText("");
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -222,8 +233,8 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 });
                 alertView.show();
             }else {
-                if(!state.getText().toString().trim().equalsIgnoreCase("")) {
-                    stateIdz = stateList.get(getIndexOFValue(state.getText().toString(), stateList)).get("state_id");
+                if(!stateTxt.getText().toString().trim().equalsIgnoreCase("")) {
+                    stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
                 }else {
                     gps.showSettingsAlert();
                     isCheckLocation = true;
@@ -287,7 +298,7 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String strName = accountAdapter.getItem(which);
-                    city.setText(strName);
+                    cityTxt.setText(strName);
 
                 }
             }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -392,10 +403,14 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
             case R.id.submit:
                 if(user_id !=null) {
                     if(isNetworkAvailable(getApplicationContext())) {
-                        if (!phone.getText().toString().trim().isEmpty() && !address.getText().toString().trim().isEmpty()) {
-                            new bookingGas(user_id, cylinderColor.getText().toString().trim(), quantity.getText().toString().trim(), address.getText().toString().trim()
-                                    , city.getText().toString().trim(), state.getText().toString().trim(), phone.getText().toString().trim(),
-                                    expectedTime.getText().toString().trim()).execute();
+                        if (!phone.getText().toString().trim().isEmpty() && !addressTxt.getText().toString().trim().isEmpty()) {
+                            if(phone.getText().toString().trim().length() == 9 || phone.getText().toString().trim().length() == 10) {
+                                new bookingGas(user_id, cylinderColor.getText().toString().trim(), quantity.getText().toString().trim(), addressTxt.getText().toString().trim()
+                                        , cityTxt.getText().toString().trim(), stateTxt.getText().toString().trim(), code.getText().toString().trim() + phone.getText().toString().trim(),
+                                        expectedTime.getText().toString().trim()).execute();
+                            }else {
+                                showToast("Invalid Phone Number");
+                            }
                         } else {
                             showToast("Filed(s) Missing");
                         }
@@ -423,6 +438,6 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
     protected void onResume() {
         super.onResume();
         if(isCheckLocation)
-            gps.getAddress(address,city,state);
+            gps.getAddress(addressTxt,cityTxt,stateTxt);
     }
 }

@@ -47,4 +47,5 @@
     <string name="email_id">moorthy@kshomegas.com</string>
     <string name="website_view">Website : </string>
     <string name="website">kshomegas.com</string>
+    <string name="same_address">same as Register Address</string>
 </resources>

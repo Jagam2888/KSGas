@@ -48,11 +48,21 @@
                 android:maxLines="1"/>
         </android.support.design.widget.TextInputLayout>
 
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/same_address"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/quantity_layout"
+            android:layout_alignParentRight="true"
+            android:onClick="onCheckboxClicked"/>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/address_layout"
-            android:layout_below="@+id/quantity_layout">
+            android:layout_below="@+id/checkbox">
             <EditText
                 android:id="@+id/address"
                 android:layout_width="match_parent"
@@ -93,18 +103,35 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/code_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/city_layout">
+
+            <EditText
+                android:id="@+id/edit_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+60"
+                android:textColor="@android:color/black"
+                android:maxLines="1"
+                android:focusable="false"
+                android:maxLength="11"/></android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phone_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/phone_layout"
-            android:layout_below="@+id/city_layout">
+            android:layout_below="@id/city_layout"
+            android:layout_toRightOf="@+id/code_layout">
             <EditText
                 android:id="@+id/phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone"
-                android:textColor="@android:color/black"
+                android:inputType="phone"
+                android:hint="@string/phone"
                 android:maxLines="1"
-                android:inputType="phone"/>
+                android:maxLength="10"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
