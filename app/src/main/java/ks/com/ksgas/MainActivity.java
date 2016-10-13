@@ -304,6 +304,7 @@ public class MainActivity extends ActivityManager
         }else if(id == R.id.action_book_history){
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), BookingHistory.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
@@ -311,42 +312,59 @@ public class MainActivity extends ActivityManager
         }else if(id == R.id.action_order_req) {
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), OrderRequest.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == R.id.action_order_history) {
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), OrderHistory.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == imageOne.getId()) {
             if(isNetworkAvailable(getApplicationContext())) {
-                navigateWithBundle(getApplicationContext(), BookCylinder.class, "YELLOW");
+                if(user_id != null && user_type.equalsIgnoreCase("customer")) {
+                    navigateWithBundle(getApplicationContext(), BookCylinder.class, "YELLOW");
+                    menusClosed();
+                }
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == imageTwo.getId()) {
             if(isNetworkAvailable(getApplicationContext())) {
-                navigateWithBundle(getApplicationContext(), BookCylinder.class, "ORANGE");
+                if(user_id != null && user_type.equalsIgnoreCase("customer")) {
+                    navigateWithBundle(getApplicationContext(), BookCylinder.class, "ORANGE");
+                    menusClosed();
+                }
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == imageThree.getId()) {
             if(isNetworkAvailable(getApplicationContext())) {
-                navigateWithBundle(getApplicationContext(), BookCylinder.class, "BLUE");
+                if(user_id != null && user_type.equalsIgnoreCase("customer")) {
+                    navigateWithBundle(getApplicationContext(), BookCylinder.class, "BLUE");
+                    menusClosed();
+                }
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == imageFour.getId()) {
             if(isNetworkAvailable(getApplicationContext())) {
-                navigateWithBundle(getApplicationContext(), BookCylinder.class, "RED");
+                if(user_id != null && user_type.equalsIgnoreCase("customer")) {
+                    navigateWithBundle(getApplicationContext(), BookCylinder.class, "RED");
+                    menusClosed();
+                }
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == imageFive.getId()) {
             if(isNetworkAvailable(getApplicationContext())) {
-                navigateWithBundle(getApplicationContext(), BookCylinder.class, "GREEN");
+                if(user_id != null && user_type.equalsIgnoreCase("customer")) {
+                    navigateWithBundle(getApplicationContext(), BookCylinder.class, "GREEN");
+                    menusClosed();
+                }
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
@@ -411,18 +429,21 @@ public class MainActivity extends ActivityManager
         } else if(id == R.id.nav_book_history){
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), BookingHistory.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == R.id.nav_order_req) {
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), OrderRequest.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
         }else if(id == R.id.nav_order_history) {
             if(isNetworkAvailable(getApplicationContext())) {
                 startActivity(new Intent(getApplicationContext(), OrderHistory.class));
+                menusClosed();
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
@@ -437,8 +458,10 @@ public class MainActivity extends ActivityManager
 
         } else if (id == R.id.nav_talk) {
             startActivity(new Intent(getApplicationContext(),Talktous.class));
+            menusClosed();
         } else if (id == R.id.nav_feedback) {
             startActivity(new Intent(getApplicationContext(),Feedback.class));
+            menusClosed();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

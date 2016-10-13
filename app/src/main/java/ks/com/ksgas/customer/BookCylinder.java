@@ -40,11 +40,11 @@ import ks.com.ksgas.common.ServiceHandler;
  */
 public class BookCylinder extends ActivityManager implements View.OnClickListener{
 
-    EditText cylinderColor, quantity, addressTxt, stateTxt, cityTxt, phone,code;
+    EditText cylinderColor, quantity, addressTxt, stateTxt, cityTxt, phoneTxt,codeTxt;
     static EditText expectedTime;
     ArrayList<HashMap<String,String>>cylinderList, stateList,cityList;
     GPSTracker gps;
-    String stateIdz, cylinderType, user_id,address,city,state;
+    String stateIdz, cylinderType, user_id,address,city,state,phone;
     boolean isStateClick = false, isCheckLocation = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +63,11 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         address = preferences.getString("address",null);
         city = preferences.getString("city",null);
         state = preferences.getString("state",null);
+        phone = preferences.getString("phone",null);
         initialize();
 
     }
+
 
     public void onCheckboxClicked(View view) {
         boolean isChecked = ((CheckBox)view).isChecked();
@@ -92,8 +94,9 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         stateTxt.setOnClickListener(this);
         cityTxt = (EditText)findViewById(R.id.city);
         cityTxt.setOnClickListener(this);
-        phone = (EditText)findViewById(R.id.phone);
-        code = (EditText)findViewById(R.id.edit_code);
+        phoneTxt = (EditText)findViewById(R.id.phone);
+        phoneTxt.setText(phone.substring(3));
+        codeTxt = (EditText)findViewById(R.id.edit_code);
         expectedTime = (EditText)findViewById(R.id.expected_time);
         expectedTime.setText(getCurrentTime());
         expectedTime.setOnClickListener(this);
@@ -403,10 +406,10 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
             case R.id.submit:
                 if(user_id !=null) {
                     if(isNetworkAvailable(getApplicationContext())) {
-                        if (!phone.getText().toString().trim().isEmpty() && !addressTxt.getText().toString().trim().isEmpty()) {
-                            if(phone.getText().toString().trim().length() == 9 || phone.getText().toString().trim().length() == 10) {
+                        if (!phoneTxt.getText().toString().trim().isEmpty() && !addressTxt.getText().toString().trim().isEmpty()) {
+                            if(phoneTxt.getText().toString().trim().length() == 9 || phoneTxt.getText().toString().trim().length() == 10) {
                                 new bookingGas(user_id, cylinderColor.getText().toString().trim(), quantity.getText().toString().trim(), addressTxt.getText().toString().trim()
-                                        , cityTxt.getText().toString().trim(), stateTxt.getText().toString().trim(), code.getText().toString().trim() + phone.getText().toString().trim(),
+                                        , cityTxt.getText().toString().trim(), stateTxt.getText().toString().trim(), codeTxt.getText().toString().trim() + phoneTxt.getText().toString().trim(),
                                         expectedTime.getText().toString().trim()).execute();
                             }else {
                                 showToast("Invalid Phone Number");
