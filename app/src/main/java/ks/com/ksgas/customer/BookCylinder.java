@@ -95,7 +95,6 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         cityTxt = (EditText)findViewById(R.id.city);
         cityTxt.setOnClickListener(this);
         phoneTxt = (EditText)findViewById(R.id.phone);
-        phoneTxt.setText(phone.substring(3));
         codeTxt = (EditText)findViewById(R.id.edit_code);
         expectedTime = (EditText)findViewById(R.id.expected_time);
         expectedTime.setText(getCurrentTime());
@@ -104,6 +103,8 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         submit.setOnClickListener(this);
         gps.getAddress(addressTxt,cityTxt,stateTxt);
         new get_state().execute();
+        if(user_id != null)
+            phoneTxt.setText(phone.substring(3));
     }
 
     public static class TimePickerFragment extends DialogFragment
