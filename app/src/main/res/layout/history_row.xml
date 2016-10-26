@@ -31,7 +31,8 @@
         android:textColor="@android:color/black"
         android:layout_below="@+id/cylinderTxt"
         android:textStyle="bold"
-        android:text="Phone : "/>
+        android:text="Dealer Phone : "
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/phoneTxt"
@@ -40,7 +41,8 @@
         android:textColor="@android:color/black"
         android:layout_below="@+id/cylinderTxt"
         android:layout_toRightOf="@+id/phoneView"
-        android:text="sample"/>
+        android:text="sample"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/dealerView"

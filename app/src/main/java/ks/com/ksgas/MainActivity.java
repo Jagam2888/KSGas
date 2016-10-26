@@ -130,7 +130,7 @@ public class MainActivity extends ActivityManager
         RelativeLayout.LayoutParams textViewLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         textViewLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         textView.setLayoutParams(textViewLayoutParams);
-        textView.setText("We have best dealers in Malaysia");
+        textView.setText("We have the best dealers in Malaysia");
         textView.setTextColor(Color.RED);
         textView.setTextSize(16);
         textView.setSingleLine();

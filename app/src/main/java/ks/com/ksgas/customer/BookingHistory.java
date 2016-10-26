@@ -76,6 +76,7 @@ public class BookingHistory extends ActivityManager{
                             maps.put("phone",getItems.getString("phone"));
                             maps.put("order_status",getItems.getString("order_status"));
                             maps.put("user_name",getItems.getString("user_name"));
+                            maps.put("dealer_phone",getItems.getString("dealer_phone"));
                             bookingHistoryList.add(maps);
                         }
                     }

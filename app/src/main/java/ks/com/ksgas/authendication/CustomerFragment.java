@@ -75,7 +75,11 @@ public class CustomerFragment extends Fragment{
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),Signup.class));
+                if(isNetworkAvailable(getActivity())) {
+                    startActivity(new Intent(getActivity(), Signup.class));
+                }else {
+                    Toast.makeText(getActivity(),"Please Check Your Internet Connection!",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

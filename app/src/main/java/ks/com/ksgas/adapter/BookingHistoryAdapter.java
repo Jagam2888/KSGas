@@ -48,18 +48,22 @@ public class BookingHistoryAdapter extends BaseAdapter{
             view = inflater.inflate(R.layout.history_row, null);
         }
             TextView cylinderView = (TextView)view.findViewById(R.id.cylinderTxt);
-            TextView phoneView = (TextView)view.findViewById(R.id.phoneTxt);
+            TextView phoneTxt = (TextView)view.findViewById(R.id.phoneTxt);
+            TextView phoneView = (TextView)view.findViewById(R.id.phoneView);
             TextView statusView = (TextView)view.findViewById(R.id.statusTxt);
             TextView dealerView = (TextView)view.findViewById(R.id.dealerView);
             TextView dealerTxt = (TextView)view.findViewById(R.id.dealerTxt);
 
             cylinderView.setText(data.get(i).get("cylinder_type"));
-            phoneView.setText(data.get(i).get("phone"));
+
 
             if(!data.get(i).get("user_name").equalsIgnoreCase("")){
                 dealerView.setVisibility(View.VISIBLE);
                 dealerTxt.setVisibility(View.VISIBLE);
+                phoneView.setVisibility(View.VISIBLE);
+                phoneTxt.setVisibility(View.VISIBLE);
                 dealerTxt.setText(data.get(i).get("user_name"));
+                phoneTxt.setText(data.get(i).get("dealer_phone"));
             }
 
             if(data.get(i).get("order_status").equalsIgnoreCase("P")) {
