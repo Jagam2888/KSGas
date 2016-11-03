@@ -46,6 +46,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Talktous"
             android:screenOrientation="portrait"/>
+        <activity android:name=".authendication.UpdateProfile"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".fcm.CustomFirebaseMessagingService">

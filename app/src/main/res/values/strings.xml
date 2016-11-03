@@ -48,4 +48,5 @@
     <string name="website_view">Website : </string>
     <string name="website">kshomegas.com</string>
     <string name="same_address">same as Register Address</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

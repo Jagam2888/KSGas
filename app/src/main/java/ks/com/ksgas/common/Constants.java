@@ -20,5 +20,7 @@ public class Constants {
     public static String accept_order_request = URLs+"accept_order_request.php";
     public static String check_balance = URLs+"balance.php";
     public static String logout = URLs+"logout.php";
+    public static String getUserDetail = URLs+"get_user_detail.php";
+    public static String editProfile = URLs+"edit_profile.php";
 
 }

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ks.com.ksgas.authendication.Login;
+import ks.com.ksgas.authendication.UpdateProfile;
 import ks.com.ksgas.common.ActivityManager;
 import ks.com.ksgas.common.Constants;
 import ks.com.ksgas.common.ServiceHandler;
@@ -50,7 +51,7 @@ public class MainActivity extends ActivityManager
     FloatingActionButton actionLogin, actionBookingHistory, actionBookCylinder, orderHistory, orderReq;
     TextView loginUser;
     ImageView imageOne,imageTwo,imageThree,imageFour,imageFive;
-    MenuItem menuLogout,menuBookHistory, menuBook, menuOrderHistory, menuOrderRequest;
+    MenuItem menuLogout,menuUpdate, menuBook, menuOrderHistory, menuOrderRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -260,9 +261,13 @@ public class MainActivity extends ActivityManager
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         menuLogout = menu.findItem(R.id.action_logout);
+        menuUpdate = menu.findItem(R.id.action_update);
 
         if(user_id != null) {
             menuLogout.setTitle("Logout");
+            if(!user_type.equalsIgnoreCase("dealer")) {
+                menuUpdate.setVisible(true);
+            }
         }else {
             menuLogout.setTitle("Login");
         }
@@ -399,6 +404,16 @@ public class MainActivity extends ActivityManager
                 } else {
                     startActivity(new Intent(getApplicationContext(), Login.class));
                 }
+            }else {
+                showAlert("Please Check Your Internet Connection!");
+            }
+            return true;
+        }else if(id == R.id.action_update) {
+            if(isNetworkAvailable(getApplicationContext())) {
+                if(user_id != null) {
+                    navigateWithBundle(getApplicationContext(),UpdateProfile.class,user_id);
+                }
+
             }else {
                 showAlert("Please Check Your Internet Connection!");
             }
