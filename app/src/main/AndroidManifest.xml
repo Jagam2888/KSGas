@@ -48,6 +48,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".authendication.UpdateProfile"
             android:screenOrientation="portrait"/>
+        <activity android:name=".authendication.ChangePassword"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".fcm.CustomFirebaseMessagingService">

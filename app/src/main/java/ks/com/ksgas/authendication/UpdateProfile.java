@@ -59,6 +59,7 @@ public class UpdateProfile extends ActivityManager implements View.OnClickListen
         stateTxt.setOnClickListener(this);
         submit = (Button)findViewById(R.id.submit);
         submit.setOnClickListener(this);
+        submit.setText("Update");
 //        gps.getAddress(addressTxt,cityTxt,stateTxt);
         codeTxt = (EditText)findViewById(R.id.edit_code);
         codeTxt.setVisibility(View.GONE);

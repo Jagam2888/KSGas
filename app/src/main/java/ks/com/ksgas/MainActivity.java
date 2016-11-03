@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import ks.com.ksgas.authendication.ChangePassword;
 import ks.com.ksgas.authendication.Login;
 import ks.com.ksgas.authendication.UpdateProfile;
 import ks.com.ksgas.common.ActivityManager;
@@ -51,7 +52,7 @@ public class MainActivity extends ActivityManager
     FloatingActionButton actionLogin, actionBookingHistory, actionBookCylinder, orderHistory, orderReq;
     TextView loginUser;
     ImageView imageOne,imageTwo,imageThree,imageFour,imageFive;
-    MenuItem menuLogout,menuUpdate, menuBook, menuOrderHistory, menuOrderRequest;
+    MenuItem menuLogout,menuUpdate, menuPassword, menuOrderHistory, menuOrderRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -262,6 +263,7 @@ public class MainActivity extends ActivityManager
         getMenuInflater().inflate(R.menu.main, menu);
         menuLogout = menu.findItem(R.id.action_logout);
         menuUpdate = menu.findItem(R.id.action_update);
+        menuPassword = menu.findItem(R.id.action_password);
 
         if(user_id != null) {
             menuLogout.setTitle("Logout");
@@ -270,6 +272,7 @@ public class MainActivity extends ActivityManager
             }
         }else {
             menuLogout.setTitle("Login");
+            menuPassword.setVisible(false);
         }
 
         return true;
@@ -418,6 +421,12 @@ public class MainActivity extends ActivityManager
                 showAlert("Please Check Your Internet Connection!");
             }
             return true;
+        }else if(id == R.id.action_password) {
+            if(isNetworkAvailable(getApplicationContext())) {
+                navigateWithBundle(getApplicationContext(),ChangePassword.class,user_id);
+            }else {
+                showAlert("Please Check Your Internet Connection!");
+            }
         }
 
         return super.onOptionsItemSelected(item);

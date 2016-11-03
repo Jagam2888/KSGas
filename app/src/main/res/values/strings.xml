@@ -49,4 +49,7 @@
     <string name="website">kshomegas.com</string>
     <string name="same_address">same as Register Address</string>
     <string name="update_profile">Update Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
 </resources>
