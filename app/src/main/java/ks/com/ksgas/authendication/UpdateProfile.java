@@ -26,7 +26,7 @@ import ks.com.ksgas.common.ServiceHandler;
  * Created by jaga on 11/3/16.
  */
 
-public class UpdateProfile extends ActivityManager implements View.OnClickListener{
+public class UpdateProfile extends ActivityManager implements View.OnClickListener {
 
     EditText nameTxt, emailTxt, phoneTxt, passwordTxt, confirmTxt,codeTxt,addressTxt,cityTxt,stateTxt;
     Button submit;
