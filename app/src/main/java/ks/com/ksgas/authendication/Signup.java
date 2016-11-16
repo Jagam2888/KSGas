@@ -45,6 +45,7 @@ public class Signup extends ActivityManager implements View.OnClickListener{
     GPSTracker gps;
     boolean isStateClick = false, isCheckLocation = false;
     String stateIdz;
+    ArrayList<String>formatAddressList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +55,7 @@ public class Signup extends ActivityManager implements View.OnClickListener{
         gps = new GPSTracker(this);
         stateList = new ArrayList<HashMap<String,String>>();
         cityList = new ArrayList<HashMap<String,String>>();
+        formatAddressList = new ArrayList<String>();
 
         getSupportActionBar().setTitle("Sign Up");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,6 +81,7 @@ public class Signup extends ActivityManager implements View.OnClickListener{
     }
 
     private class get_state extends AsyncTask<String,String,String> {
+        String addressValue;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -130,6 +133,7 @@ public class Signup extends ActivityManager implements View.OnClickListener{
                         stateTxt.setText(strName);
                         stateIdz = stateList.get(which).get("state_id");
                         cityTxt.setText("");
+                        addressTxt.setText("");
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -141,7 +145,9 @@ public class Signup extends ActivityManager implements View.OnClickListener{
                 alertView.show();
             }else {
                 if(!stateTxt.getText().toString().trim().equalsIgnoreCase("")) {
-                    stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
+                    if(stateList.contains(stateTxt.getText().toString())) {
+                        stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
+                    }
                 }else {
                     gps.showSettingsAlert();
                     isCheckLocation = true;
@@ -327,7 +333,9 @@ public class Signup extends ActivityManager implements View.OnClickListener{
                 break;
             case R.id.edit_city:
                 if(isNetworkAvailable(getApplicationContext())) {
-                    new get_city(stateIdz).execute();
+                    if(stateIdz != null) {
+                        new get_city(stateIdz).execute();
+                    }
                 }else {
                     showAlert("Please Check Your Internet Connection!");
                 }

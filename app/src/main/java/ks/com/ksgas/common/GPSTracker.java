@@ -219,11 +219,15 @@ public class GPSTracker extends Service implements LocationListener {
             if (localAddress.size() > 0)
             {
                 String yourAddress = localAddress.get(0).getAddressLine(0);
+                String yourAddress1 = localAddress.get(0).getAddressLine(1);
                 String yourCity = localAddress.get(0).getLocality();
                 String yourState = localAddress.get(0).getAdminArea();
                 city.setText(yourCity);
                 state.setText(yourState);
-                address.setText(yourAddress);
+				if(yourAddress1 == null) {
+					yourAddress1 = "";
+				}
+                address.setText(yourAddress+", "+yourAddress1);
             }
         }catch (IOException e) {
             e.printStackTrace();

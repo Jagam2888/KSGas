@@ -74,9 +74,13 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
         switch (view.getId()) {
             case R.id.checkbox:
                 if(isChecked) {
-                    addressTxt.setText(address);
-                    cityTxt.setText(city);
-                    stateTxt.setText(state);
+                    if(user_id != null) {
+                        addressTxt.setText(address);
+                        cityTxt.setText(city);
+                        stateTxt.setText(state);
+                    }else {
+                        showToast("Please Login!");
+                    }
                 }else {
                     gps.getAddress(addressTxt,cityTxt,stateTxt);
                 }
@@ -238,7 +242,9 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 alertView.show();
             }else {
                 if(!stateTxt.getText().toString().trim().equalsIgnoreCase("")) {
-                    stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
+                    if(stateList.contains(stateTxt.getText().toString())) {
+                        stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
+                    }
                 }else {
                     gps.showSettingsAlert();
                     isCheckLocation = true;
@@ -399,7 +405,9 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 break;
             case R.id.city:
                 if(isNetworkAvailable(getApplicationContext())) {
-                    new get_city(stateIdz).execute();
+                    if(stateIdz != null) {
+                        new get_city(stateIdz).execute();
+                    }
                 }else {
                     showAlert("Please Check Your Internet Connection!");
                 }

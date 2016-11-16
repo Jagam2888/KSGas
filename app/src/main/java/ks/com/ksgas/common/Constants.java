@@ -4,6 +4,7 @@ package ks.com.ksgas.common;
  * Created by jaga on 23/08/16.
  */
 public class Constants {
+    public static String get_address_from_google = "http://maps.googleapis.com/maps/api/geocode/json";
     public static String URLs = "http://kshomegas.com/ksgas_app/";
 
     public static String get_gasType = URLs+"get_gas_type.php";

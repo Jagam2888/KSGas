@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Address"
                 android:textColor="@android:color/black"
-                android:maxLines="1"/>
+                android:maxLines="3"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:hint="State"
                 android:textColor="@android:color/black"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:focusable="false"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:hint="City"
                 android:textColor="@android:color/black"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:focusable="false"/>
         </android.support.design.widget.TextInputLayout>
 
