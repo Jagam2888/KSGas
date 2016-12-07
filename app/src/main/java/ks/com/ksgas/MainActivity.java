@@ -3,6 +3,7 @@ package ks.com.ksgas;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.View;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import ks.com.ksgas.authendication.ChangePassword;
 import ks.com.ksgas.authendication.Login;
@@ -53,6 +55,7 @@ public class MainActivity extends ActivityManager
     TextView loginUser;
     ImageView imageOne,imageTwo,imageThree,imageFour,imageFive;
     MenuItem menuLogout,menuUpdate, menuPassword, menuOrderHistory, menuOrderRequest;
+    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +128,18 @@ public class MainActivity extends ActivityManager
 
     }
 
+    public static int generateViewId() {
+        for (;;) {
+            final int result = sNextGeneratedId.get();
+            // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
+            int newValue = result + 1;
+            if (newValue > 0x00FFFFFF) newValue = 1; // Roll over to 1, not 0.
+            if (sNextGeneratedId.compareAndSet(result, newValue)) {
+                return result;
+            }
+        }
+    }
+
     void displayImages() {
 
 
@@ -136,7 +151,11 @@ public class MainActivity extends ActivityManager
         textView.setTextColor(Color.RED);
         textView.setTextSize(16);
         textView.setSingleLine();
-        textView.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            textView.setId(View.generateViewId());
+        }else {
+            textView.setId(generateViewId());
+        }
         mainLayout.addView(textView);
 
         imageOne = new ImageView(getApplicationContext());
@@ -144,7 +163,11 @@ public class MainActivity extends ActivityManager
         imageOneLayoutParams.addRule(RelativeLayout.BELOW,textView.getId());
         imageOne.setLayoutParams(imageOneLayoutParams);
         imageOne.setImageResource(R.drawable.gas_one);
-        imageOne.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            imageOne.setId(View.generateViewId());
+        }else {
+            imageOne.setId(generateViewId());
+        }
         mainLayout.addView(imageOne);
         imageOne.setOnClickListener(this);
 
@@ -154,7 +177,11 @@ public class MainActivity extends ActivityManager
         imageTwoLayoutParams.addRule(RelativeLayout.BELOW,textView.getId());
         imageTwo.setLayoutParams(imageTwoLayoutParams);
         imageTwo.setImageResource(R.drawable.gas_two);
-        imageTwo.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            imageTwo.setId(View.generateViewId());
+        }else {
+            imageTwo.setId(generateViewId());
+        }
         mainLayout.addView(imageTwo);
         imageTwo.setOnClickListener(this);
 
@@ -164,7 +191,11 @@ public class MainActivity extends ActivityManager
         imageThreeLayoutParams.setMargins(0,getHeightByPercentage(2),0,0);
         imageThree.setLayoutParams(imageThreeLayoutParams);
         imageThree.setImageResource(R.drawable.gas_three);
-        imageThree.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            imageThree.setId(View.generateViewId());
+        }else {
+            imageThree.setId(generateViewId());
+        }
         mainLayout.addView(imageThree);
         imageThree.setOnClickListener(this);
 
@@ -175,7 +206,11 @@ public class MainActivity extends ActivityManager
         imageFourLayoutParams.setMargins(0,getHeightByPercentage(2),0,0);
         imageFour.setLayoutParams(imageFourLayoutParams);
         imageFour.setImageResource(R.drawable.gas_four);
-        imageFour.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            imageFour.setId(View.generateViewId());
+        }else {
+            imageFour.setId(generateViewId());
+        }
         mainLayout.addView(imageFour);
         imageFour.setOnClickListener(this);
 
@@ -185,7 +220,11 @@ public class MainActivity extends ActivityManager
         imageFiveLayoutParams.setMargins(0,getHeightByPercentage(2),0,0);
         imageFive.setLayoutParams(imageFiveLayoutParams);
         imageFive.setImageResource(R.drawable.gas_five);
-        imageFive.setId(View.generateViewId());
+        if(Build.VERSION.SDK_INT >= 17) {
+            imageFive.setId(View.generateViewId());
+        }else {
+            imageFive.setId(generateViewId());
+        }
         mainLayout.addView(imageFive);
         imageFive.setOnClickListener(this);
 

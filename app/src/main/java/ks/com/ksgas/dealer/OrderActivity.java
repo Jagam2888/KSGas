@@ -1,5 +1,7 @@
 package ks.com.ksgas.dealer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -29,7 +31,7 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
 
     String booking_id, user_id, orderStatus;
     TextView typeView,qtyView, addressView,phoneView, nameView, timeView;
-    Button accept;
+    Button accept, cancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,8 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
         timeView = (TextView)findViewById(R.id.customer_time);
         accept = (Button)findViewById(R.id.accept);
         accept.setOnClickListener(this);
+        cancel = (Button)findViewById(R.id.cancel);
+        cancel.setOnClickListener(this);
         new get_order().execute();
     }
 
@@ -108,8 +112,10 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
             timeView.setText(time);
             if(orderStatus.equalsIgnoreCase("P")) {
                 accept.setText("Accept");
+                cancel.setVisibility(View.GONE);
             }else {
                 accept.setText("Delivered");
+                cancel.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -165,6 +171,63 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
         }
     }
 
+    private class orderCancelTask extends AsyncTask<String,String,String> {
+
+        String msg,success;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            List<NameValuePair>valuePairs = new ArrayList<NameValuePair>();
+            valuePairs.add(new BasicNameValuePair("booking_id",booking_id));
+            valuePairs.add(new BasicNameValuePair("user_id",user_id));
+
+            String response = serviceHandler.makeServiceCall(Constants.orderCancel,ServiceHandler.POST,valuePairs);
+            if(response != null){
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject getJson = jsonObject.getJSONObject("response");
+                    success = getJson.getString("Success");
+                    msg = getJson.getString("msg");
+
+                }catch (JSONException js) {
+                    js.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.dismiss();
+            showAlert(msg);
+            editor.putInt("return_back",1);
+            editor.commit();
+        }
+    }
+
+    void showAlertView() {
+        AlertDialog.Builder alBuilder = new AlertDialog.Builder(OrderActivity.this);
+        alBuilder.setTitle(R.string.app_name).setIcon(R.mipmap.ic_launcher);
+        alBuilder.setMessage("Are you sure want to Cancel?").setCancelable(false);
+        alBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                new orderCancelTask().execute();
+            }
+        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).show();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -177,6 +240,13 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
                         status = "D";
                     }
                     new orderAcceptTask(status).execute();
+                }else {
+                    showAlert("Please Check Your Internet Connection!");
+                }
+                break;
+            case R.id.cancel:
+                if(isNetworkAvailable(getApplicationContext())) {
+                    showAlertView();
                 }else {
                     showAlert("Please Check Your Internet Connection!");
                 }

@@ -64,6 +64,9 @@ public class BookingHistoryAdapter extends BaseAdapter{
                 phoneTxt.setVisibility(View.VISIBLE);
                 dealerTxt.setText(data.get(i).get("user_name"));
                 phoneTxt.setText(data.get(i).get("dealer_phone"));
+            }else {
+                dealerTxt.setText("");
+                phoneTxt.setText("");
             }
 
             if(data.get(i).get("order_status").equalsIgnoreCase("P")) {
@@ -73,7 +76,7 @@ public class BookingHistoryAdapter extends BaseAdapter{
             }else if(data.get(i).get("order_status").equalsIgnoreCase("D")){
                 statusView.setText("Delivered");
             }else {
-                statusView.setText("Cancel");
+                statusView.setText("Cancelled");
             }
         return view;
     }

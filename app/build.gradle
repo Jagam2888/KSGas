@@ -9,8 +9,8 @@ android {
         applicationId "ks.com.ksgas"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 12
-        versionName "2.1"
+        versionCode 14
+        versionName "2.3"
     }
     buildTypes {
         release {
