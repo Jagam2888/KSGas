@@ -25,5 +25,6 @@ public class Constants {
     public static String editProfile = URLs+"edit_profile.php";
     public static String change_password = URLs+"change_password.php";
     public static String orderCancel = URLs+"order_cancel.php";
+    public static String orderDelivered = URLs+"order_delivered.php";
 
 }

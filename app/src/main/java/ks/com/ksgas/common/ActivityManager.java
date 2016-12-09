@@ -164,6 +164,16 @@ public class ActivityManager extends AppCompatActivity {
         return -1;
     }
 
+    public boolean isContains(String value, ArrayList<HashMap<String, String>> listMap){
+
+        for(Map<String,String> map : listMap){
+            if(map.containsValue(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {

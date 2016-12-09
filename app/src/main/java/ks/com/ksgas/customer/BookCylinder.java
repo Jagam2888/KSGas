@@ -242,7 +242,7 @@ public class BookCylinder extends ActivityManager implements View.OnClickListene
                 alertView.show();
             }else {
                 if(!stateTxt.getText().toString().trim().equalsIgnoreCase("")) {
-                    if(stateList.contains(stateTxt.getText().toString())) {
+                    if(isContains(stateTxt.getText().toString().trim(),stateList)) {
                         stateIdz = stateList.get(getIndexOFValue(stateTxt.getText().toString(), stateList)).get("state_id");
                     }
                 }else {

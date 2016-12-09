@@ -50,7 +50,7 @@ public class ChangePassword extends ActivityManager implements View.OnClickListe
 
     private class changePassword extends AsyncTask<String,String,String> {
 
-        String user_id,old_password,new_password,msg;
+        String user_id,old_password,new_password,msg,success;
         public changePassword(String user_id,String old_password,String new_password) {
             this.user_id = user_id;
             this.old_password = old_password;
@@ -73,10 +73,9 @@ public class ChangePassword extends ActivityManager implements View.OnClickListe
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     JSONObject getJson = jsonObject.getJSONObject("response");
-                    String success = getJson.getString("Success");
-                    if(success.equalsIgnoreCase("1")){
-                        msg = getJson.getString("msg");
-                    }
+                    success = getJson.getString("Success");
+                    msg = getJson.getString("msg");
+
                 }catch (JSONException js){
                     js.printStackTrace();
                 }
@@ -89,7 +88,9 @@ public class ChangePassword extends ActivityManager implements View.OnClickListe
             super.onPostExecute(s);
             progressDialog.dismiss();
             showToast(msg);
-            finish();
+            if(success.equalsIgnoreCase("1")){
+                finish();
+            }
         }
     }
 

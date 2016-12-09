@@ -160,14 +160,50 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressDialog.dismiss();
-            if(flag == 1) {
-                showAlert(msg);
-                editor.putInt("return_back",1);
-                editor.commit();
+            showAlert(msg);
+            editor.putInt("return_back",1);
+            editor.commit();
+
+        }
+    }
+
+    private class orderDeliveredTask extends AsyncTask<String,String,String> {
+
+        String msg,success;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            List<NameValuePair>valuePairs = new ArrayList<NameValuePair>();
+            valuePairs.add(new BasicNameValuePair("booking_id",booking_id));
+            valuePairs.add(new BasicNameValuePair("user_id",user_id));
+
+            String response = serviceHandler.makeServiceCall(Constants.orderDelivered,ServiceHandler.POST,valuePairs);
+            if(response != null){
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject getJson = jsonObject.getJSONObject("response");
+                    success = getJson.getString("Success");
+                    msg = getJson.getString("msg");
+
+                }catch (JSONException js) {
+                    js.printStackTrace();
+                }
             }
-            else {
-                showAlert(msg);
-            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.dismiss();
+            showAlert(msg);
+            editor.putInt("return_back",1);
+            editor.commit();
         }
     }
 
@@ -236,10 +272,15 @@ public class OrderActivity extends ActivityManager implements View.OnClickListen
                     String status;
                     if (orderStatus.equalsIgnoreCase("P")) {
                         status = "A";
-                    } else {
+                        new orderAcceptTask(status).execute();
+                    } else if(orderStatus.equalsIgnoreCase("A")){
                         status = "D";
+                        new orderDeliveredTask().execute();
+                    }else {
+                        //this is for safety purpose
+                        accept.setVisibility(View.GONE);
+                        cancel.setVisibility(View.GONE);
                     }
-                    new orderAcceptTask(status).execute();
                 }else {
                     showAlert("Please Check Your Internet Connection!");
                 }
