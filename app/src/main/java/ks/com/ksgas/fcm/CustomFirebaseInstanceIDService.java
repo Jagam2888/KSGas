@@ -1,10 +1,23 @@
 package ks.com.ksgas.fcm;
 
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ks.com.ksgas.common.Constants;
+import ks.com.ksgas.common.ServiceHandler;
 
 public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
@@ -14,12 +27,15 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
 
     private MySharedPreference mySharedPreference;
+    ServiceHandler serviceHandler;
+    String userid, refreshedToken;
 
     @Override
     public void onTokenRefresh() {
 
+        serviceHandler = new ServiceHandler();
         mySharedPreference = new MySharedPreference(getApplicationContext());
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Token Value: " + refreshedToken);
         if(refreshedToken == null) {
             mySharedPreference.saveNotificationSubscription(false);
@@ -27,8 +43,44 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
             mySharedPreference.saveNotificationSubscription(true);
             mySharedPreference.refreshToken(refreshedToken);
         }
+        userid = mySharedPreference.getUserId();
 
-//        sendTheRegisteredTokenToWebServer(refreshedToken);
+        sendTheRegisteredTokenToWebServer();
+    }
+
+    private class refreshToken extends AsyncTask<String,String,String> {
+
+        String msg;
+        @Override
+        protected String doInBackground(String... strings) {
+            List<NameValuePair>valuePairs = new ArrayList<NameValuePair>();
+            valuePairs.add(new BasicNameValuePair("user_id",userid));
+            valuePairs.add(new BasicNameValuePair("token",refreshedToken));
+            String response = serviceHandler.makeServiceCall(Constants.refreshFCMToken,ServiceHandler.POST,valuePairs);
+            if(response != null) {
+                try {
+
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONObject getJson = jsonObject.getJSONObject("response");
+                    String success = getJson.getString("success");
+                     msg = getJson.getString("msg");
+
+                }catch (JSONException js) {
+                    js.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+            super.onPostExecute(s);
+        }
+    }
+
+    private void sendTheRegisteredTokenToWebServer(){
+        new refreshToken().execute();
     }
 
     /*private void sendTheRegisteredTokenToWebServer(final String token){

@@ -45,6 +45,7 @@ public class DealerFragment extends Fragment {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     MySharedPreference mySharedPreference;
+    private MySharedPreference mySharedPreferences;
     String fcmToken;
     public DealerFragment() {
 
@@ -54,6 +55,7 @@ public class DealerFragment extends Fragment {
         super.onCreate(savedInstanceState);
         serviceHandler = new ServiceHandler();
         preferences = getActivity().getSharedPreferences("set",getActivity().MODE_PRIVATE);
+        mySharedPreferences = new MySharedPreference(getActivity());
         editor = preferences.edit();
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
@@ -123,6 +125,7 @@ public class DealerFragment extends Fragment {
                     if(success.equalsIgnoreCase("1")) {
                         JSONArray jsonArray = getJson.getJSONArray("items");
                         JSONObject getArray = jsonArray.getJSONObject(0);
+                        mySharedPreferences.setUserId(getArray.getString("user_id"));
                         editor.putString("user_id",getArray.getString("user_id"));
                         editor.putString("user_name",getArray.getString("user_name"));
                         editor.putString("phone",getArray.getString("phone"));

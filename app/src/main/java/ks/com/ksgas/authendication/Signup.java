@@ -4,8 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,7 +28,6 @@ import ks.com.ksgas.common.ActivityManager;
 import ks.com.ksgas.common.Constants;
 import ks.com.ksgas.common.GPSTracker;
 import ks.com.ksgas.common.ServiceHandler;
-import ks.com.ksgas.customer.BookCylinder;
 import ks.com.ksgas.fcm.MySharedPreference;
 
 /**
@@ -46,11 +44,13 @@ public class Signup extends ActivityManager implements View.OnClickListener{
     boolean isStateClick = false, isCheckLocation = false;
     String stateIdz;
     ArrayList<String>formatAddressList;
+    private MySharedPreference mySharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
         mySharedPreference = new MySharedPreference(this);
+        mySharedPreferences = new MySharedPreference(getApplicationContext());
         fcmToken = mySharedPreference.getRefreshToken();
         gps = new GPSTracker(this);
         stateList = new ArrayList<HashMap<String,String>>();
@@ -265,6 +265,7 @@ public class Signup extends ActivityManager implements View.OnClickListener{
                     if(success.equalsIgnoreCase("1")) {
                         JSONArray jsonArray = getJson.getJSONArray("items");
                         JSONObject getArray = jsonArray.getJSONObject(0);
+                        mySharedPreferences.setUserId(getArray.getString("user_id"));
                         editor.putString("user_id",getArray.getString("user_id"));
                         editor.putString("user_name",getArray.getString("user_name"));
                         editor.putString("phone",getArray.getString("phone"));

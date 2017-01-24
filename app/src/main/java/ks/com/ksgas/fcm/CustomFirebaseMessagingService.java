@@ -44,7 +44,7 @@ public class CustomFirebaseMessagingService extends FirebaseMessagingService{
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
-
+        // convert data string to json
         try{
             JSONObject jsonObject = new JSONObject(data);
             value = jsonObject.getString("id");
