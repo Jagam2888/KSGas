@@ -74,7 +74,7 @@ public class CustomFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
             super.onPostExecute(s);
         }
     }

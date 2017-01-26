@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "631051601338",
-    "firebase_url": "https://ksgas-1ec13.firebaseio.com",
-    "project_id": "ksgas-1ec13",
-    "storage_bucket": "ksgas-1ec13.appspot.com"
+    "project_number": "862026630989",
+    "firebase_url": "https://ksagas-abc98.firebaseio.com",
+    "project_id": "ksagas-abc98",
+    "storage_bucket": "ksagas-abc98.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:631051601338:android:7e299a3fa7011684",
+        "mobilesdk_app_id": "1:862026630989:android:7e299a3fa7011684",
         "android_client_info": {
           "package_name": "ks.com.ksgas"
         }
       },
       "oauth_client": [
         {
-          "client_id": "631051601338-juklg6lbaipdu2ls1cfba632u9j9fqhq.apps.googleusercontent.com",
+          "client_id": "862026630989-1cf14npjl7dsmeg811vlb0aa8mm37q71.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDDzkDFSnauC3-o1wGPttorJVJbQBc6Ff8"
+          "current_key": "AIzaSyAQlCQnUa-b1GRiwI_CjB5h4dvwCbcdX5A"
         }
       ],
       "services": {
